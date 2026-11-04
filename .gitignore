@@ -1,3 +1,16 @@
-vendor/
+# Secretos locales: nunca deben versionarse.
 .env
+.env.local
+.env.*.local
+
+# Logs y directorios temporales de ejecución.
+/var/log/
+/tmp/
 *.log
+
+# Configuración de editores/IDE.
+.vscode/
+.idea/
+
+# Dependencias de Composer (el proyecto no las usa, pero se mantiene la regla).
+vendor/

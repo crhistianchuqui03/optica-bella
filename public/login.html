@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar Sesión | Óptica Bellavista</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="login-body">
+    <main class="login-card">
+        <div class="login-brand">
+            <div class="login-logo" aria-hidden="true">
+                <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                    <circle cx="8" cy="12" r="5"></circle>
+                    <circle cx="16" cy="12" r="5"></circle>
+                    <path d="M11 10.5c1.3-1 2.7-1 4 0"></path>
+                </svg>
+            </div>
+            <h1>Óptica Bellavista</h1>
+            <p>Sistema ERP / POS</p>
+        </div>
+
+        <form id="login-form" novalidate>
+            <div class="form-group">
+                <label for="username">Usuario</label>
+                <input type="text" id="username" name="username" class="form-control"
+                       autocomplete="username" autofocus required>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Contraseña</label>
+                <input type="password" id="password" name="password" class="form-control"
+                       autocomplete="current-password" required>
+            </div>
+
+            <div id="login-error" class="alert alert-error" role="alert" hidden></div>
+
+            <button type="submit" id="login-btn" class="btn btn-primary btn-block btn-lg">Ingresar</button>
+        </form>
+    </main>
+
+    <script src="js/api.js"></script>
+    <script src="js/login.js"></script>
+</body>
+</html>

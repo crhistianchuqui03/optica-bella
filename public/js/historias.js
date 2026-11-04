@@ -70,13 +70,13 @@ Modulos.historias = (function () {
 
         return (
             '<table class="tabla tabla-medidas' + (historia ? ' tabla-ficha' : '') + '">' +
-                '<thead><tr><th></th>' +
-                    COLUMNAS_MEDIDAS.map(function (c) { return '<th>' + c[0] + '</th>'; }).join('') +
-                '</tr></thead>' +
-                '<tbody>' +
-                    (valores ? filaValores('od', seccion, valores) : filaMedidas('od', seccion)) +
-                    (valores ? filaValores('oi', seccion, valores) : filaMedidas('oi', seccion)) +
-                '</tbody>' +
+            '<thead><tr><th></th>' +
+            COLUMNAS_MEDIDAS.map(function (c) { return '<th>' + c[0] + '</th>'; }).join('') +
+            '</tr></thead>' +
+            '<tbody>' +
+            (valores ? filaValores('od', seccion, valores) : filaMedidas('od', seccion)) +
+            (valores ? filaValores('oi', seccion, valores) : filaMedidas('oi', seccion)) +
+            '</tbody>' +
             '</table>'
         );
     }
@@ -111,89 +111,89 @@ Modulos.historias = (function () {
 
             /* Sección A: Datos generales */
             '<section class="panel fi-seccion">' +
-                '<h3>A. Datos Generales del Paciente</h3>' +
-                '<div id="fi-datos-generales">' +
-                    '<div id="fi-paciente-resumen" class="fi-resumen" hidden></div>' +
-                    '<div id="fi-picker">' +
-                        '<div class="buscador">' +
-                            '<svg class="buscador-icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">' +
-                                '<circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.5-3.5"></path>' +
-                            '</svg>' +
-                            '<input id="buscar-paciente-historia" class="form-control" type="search" ' +
-                                'placeholder="Buscar paciente por nombre o celular..." autocomplete="off">' +
-                        '</div>' +
-                        '<div id="fi-picker-lista" class="picker-lista"></div>' +
-                    '</div>' +
-                '</div>' +
+            '<h3>A. Datos Generales del Paciente</h3>' +
+            '<div id="fi-datos-generales">' +
+            '<div id="fi-paciente-resumen" class="fi-resumen" hidden></div>' +
+            '<div id="fi-picker">' +
+            '<div class="buscador">' +
+            '<svg class="buscador-icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">' +
+            '<circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.5-3.5"></path>' +
+            '</svg>' +
+            '<input id="buscar-paciente-historia" class="form-control" type="search" ' +
+            'placeholder="Buscar paciente por nombre o celular..." autocomplete="off">' +
+            '</div>' +
+            '<div id="fi-picker-lista" class="picker-lista"></div>' +
+            '</div>' +
+            '</div>' +
             '</section>' +
 
             '<section class="panel fi-seccion" id="fi-historial-panel" hidden>' +
-                '<h3>Historial de Refracción</h3>' +
-                '<div id="fi-historial-lista"></div>' +
+            '<h3>Historial de Refracción pasado</h3>' +
+            '<div id="fi-historial-lista"></div>' +
             '</section>' +
 
             '<form id="form-historia" novalidate hidden>' +
-                '<input type="hidden" name="paciente_id" id="fi-paciente-id">' +
+            '<input type="hidden" name="paciente_id" id="fi-paciente-id">' +
 
-                '<section class="panel fi-seccion fi-fecha">' +
-                    '<h3>Fecha de Consulta</h3>' +
-                    '<input name="fecha_consulta" id="fi-fecha-consulta" class="form-control fi-fecha-input" type="date">' +
-                '</section>' +
+            '<section class="panel fi-seccion fi-fecha">' +
+            '<h3>Fecha de Consulta</h3>' +
+            '<input name="fecha_consulta" id="fi-fecha-consulta" class="form-control fi-fecha-input" type="date">' +
+            '</section>' +
 
-                '<section class="panel fi-seccion">' +
-                    '<h3>B. Visión Lejos (V.L.)</h3>' +
-                    tablaMedidas('vl') +
-                '</section>' +
+            '<section class="panel fi-seccion">' +
+            '<h3>B. Visión Lejos (V.L.)</h3>' +
+            tablaMedidas('vl') +
+            '</section>' +
 
-                '<section class="panel fi-seccion">' +
-                    '<h3>C. Adición (A.D.D.)</h3>' +
-                    '<input name="add_medicion" class="form-control add-input" type="text" inputmode="decimal" ' +
-                        'placeholder="Ej: +2.00" autocomplete="off">' +
-                '</section>' +
+            '<section class="panel fi-seccion">' +
+            '<h3>C. Adición (A.D.D.)</h3>' +
+            '<input name="add_medicion" class="form-control add-input" type="text" inputmode="decimal" ' +
+            'placeholder="Ej: +2.00" autocomplete="off">' +
+            '</section>' +
 
-                '<section class="panel fi-seccion">' +
-                    '<h3>D. Visión Cerca (V.C.)</h3>' +
-                    tablaMedidas('vc') +
-                '</section>' +
+            '<section class="panel fi-seccion">' +
+            '<h3>D. Visión Cerca (V.C.)</h3>' +
+            tablaMedidas('vc') +
+            '</section>' +
 
-                '<section class="panel fi-seccion">' +
-                    '<h3>E. Material y Tratamiento</h3>' +
-                    '<div class="form-group">' +
-                        '<label>Material</label>' +
-                        chipsHtml('material', OPCIONES_MATERIAL) +
-                    '</div>' +
-                    '<div class="form-group">' +
-                        '<label for="fi-tratamiento">Tratamiento</label>' +
-                        '<input id="fi-tratamiento" name="tratamiento" class="form-control" type="text" ' +
-                            'placeholder="Ej: Anti-reflex, Blue Block, Fotocromático" autocomplete="off">' +
-                    '</div>' +
-                    '<div class="form-group">' +
-                        '<label>Tipo de Lente</label>' +
-                        chipsHtml('tipo_lente', OPCIONES_TIPO_LENTE) +
-                    '</div>' +
-                '</section>' +
+            '<section class="panel fi-seccion">' +
+            '<h3>E. Material y Tratamiento</h3>' +
+            '<div class="form-group">' +
+            '<label>Material</label>' +
+            chipsHtml('material', OPCIONES_MATERIAL) +
+            '</div>' +
+            '<div class="form-group">' +
+            '<label for="fi-tratamiento">Tratamiento</label>' +
+            '<input id="fi-tratamiento" name="tratamiento" class="form-control" type="text" ' +
+            'placeholder="Ej: Anti-reflex, Blue Block, Fotocromático" autocomplete="off">' +
+            '</div>' +
+            '<div class="form-group">' +
+            '<label>Tipo de Lente</label>' +
+            chipsHtml('tipo_lente', OPCIONES_TIPO_LENTE) +
+            '</div>' +
+            '</section>' +
 
-                '<section class="panel fi-seccion">' +
-                    '<h3>F. Indicaciones y Próxima Cita</h3>' +
-                    '<div class="form-group">' +
-                        '<label for="fi-indicaciones">Indicaciones médicas / técnicas</label>' +
-                        '<textarea id="fi-indicaciones" name="indicaciones" class="form-control" rows="4" ' +
-                            'placeholder="Instrucciones de uso, adaptación, cuidados..."></textarea>' +
-                    '</div>' +
-                    '<div class="form-group">' +
-                        '<label for="fi-proxima-cita">Próxima Cita</label>' +
-                        '<input id="fi-proxima-cita" name="proxima_cita" class="form-control" type="date">' +
-                    '</div>' +
-                '</section>' +
+            '<section class="panel fi-seccion">' +
+            '<h3>F. Indicaciones y Próxima Cita</h3>' +
+            '<div class="form-group">' +
+            '<label for="fi-indicaciones">Indicaciones médicas / técnicas</label>' +
+            '<textarea id="fi-indicaciones" name="indicaciones" class="form-control" rows="4" ' +
+            'placeholder="Instrucciones de uso, adaptación, cuidados..."></textarea>' +
+            '</div>' +
+            '<div class="form-group">' +
+            '<label for="fi-proxima-cita">Próxima Cita</label>' +
+            '<input id="fi-proxima-cita" name="proxima_cita" class="form-control" type="date">' +
+            '</div>' +
+            '</section>' +
 
-                '<div class="fi-acciones">' +
-                    '<button id="btn-cancelar-historia" class="btn btn-ghost" type="button">' +
-                        'Cancelar / Volver' +
-                    '</button>' +
-                    '<button id="btn-guardar-historia" class="btn btn-primary btn-lg" type="submit">' +
-                        'Guardar Historia Clínica' +
-                    '</button>' +
-                '</div>' +
+            '<div class="fi-acciones">' +
+            '<button id="btn-cancelar-historia" class="btn btn-ghost" type="button">' +
+            'Cancelar / Volver' +
+            '</button>' +
+            '<button id="btn-guardar-historia" class="btn btn-primary btn-lg" type="submit">' +
+            'Guardar Historia Clínica' +
+            '</button>' +
+            '</div>' +
             '</form>';
 
         inicializar();
@@ -352,23 +352,23 @@ Modulos.historias = (function () {
             historias.forEach(function (h) {
                 html +=
                     '<div class="historia-item">' +
-                        '<div class="historia-item-cabezal">' +
-                            '<strong>Consulta: ' + escapar(h.fecha_consulta) + '</strong>' +
-                            '<span>' + escapar(h.material || '') + (h.tipo_lente ? ' · ' + escapar(h.tipo_lente) : '') + '</span>' +
-                        '</div>' +
-                        '<div class="historia-medidas">' +
-                            '<span><b>V.L. O.D.:</b> ' + valorMedida(h.esf_od_vl) + '</span>' +
-                            '<span><b>V.L. O.I.:</b> ' + valorMedida(h.esf_oi_vl) + '</span>' +
-                            '<span><b>A.D.D.:</b> ' + valorMedida(h.add_medicion) + '</span>' +
-                        '</div>' +
-                        '<div class="historia-item-acciones">' +
-                            '<button type="button" class="btn btn-ghost btn-sm" data-ver-ficha-id="' + h.id + '">' +
-                                '<span aria-hidden="true">👁️</span> Ver Ficha' +
-                            '</button>' +
-                            '<button type="button" class="btn btn-danger-outline btn-sm" data-editar-historia-id="' + h.id + '">' +
-                                'Editar Historia' +
-                            '</button>' +
-                        '</div>' +
+                    '<div class="historia-item-cabezal">' +
+                    '<strong>Consulta: ' + escapar(h.fecha_consulta) + '</strong>' +
+                    '<span>' + escapar(h.material || '') + (h.tipo_lente ? ' · ' + escapar(h.tipo_lente) : '') + '</span>' +
+                    '</div>' +
+                    '<div class="historia-medidas">' +
+                    '<span><b>V.L. O.D.:</b> ' + valorMedida(h.esf_od_vl) + '</span>' +
+                    '<span><b>V.L. O.I.:</b> ' + valorMedida(h.esf_oi_vl) + '</span>' +
+                    '<span><b>A.D.D.:</b> ' + valorMedida(h.add_medicion) + '</span>' +
+                    '</div>' +
+                    '<div class="historia-item-acciones">' +
+                    '<button type="button" class="btn btn-ghost btn-sm" data-ver-ficha-id="' + h.id + '">' +
+                    '<span aria-hidden="true">👁️</span> Ver Ficha' +
+                    '</button>' +
+                    '<button type="button" class="btn btn-danger-outline btn-sm" data-editar-historia-id="' + h.id + '">' +
+                    'Editar Historia' +
+                    '</button>' +
+                    '</div>' +
                     '</div>';
             });
             html += '</div>';
@@ -400,8 +400,8 @@ Modulos.historias = (function () {
             lista.forEach(function (paciente) {
                 html +=
                     '<button type="button" class="picker-item" data-id="' + paciente.id + '" role="option" tabindex="0">' +
-                        '<strong>' + escapar(paciente.nombres_apellidos) + '</strong>' +
-                        '<span>' + escapar(paciente.celular) + ' · ' + (paciente.edad === null ? '—' : escapar(paciente.edad) + ' años') + '</span>' +
+                    '<strong>' + escapar(paciente.nombres_apellidos) + '</strong>' +
+                    '<span>' + escapar(paciente.celular) + ' · ' + (paciente.edad === null ? '—' : escapar(paciente.edad) + ' años') + '</span>' +
                     '</button>';
             });
             html += '</div>';
@@ -497,15 +497,15 @@ Modulos.historias = (function () {
         overlay.hidden = true;
         overlay.innerHTML =
             '<div class="modal modal-lg" role="dialog" aria-modal="true" aria-labelledby="titulo-ficha">' +
-                '<div class="modal-header">' +
-                    '<h2 id="titulo-ficha">Ficha de Refracción</h2>' +
-                    '<button type="button" class="modal-close" data-cerrar-modal aria-label="Cerrar">&times;</button>' +
-                '</div>' +
-                '<div class="modal-body" id="ficha-contenido"></div>' +
-                '<div class="modal-actions">' +
-                    '<button type="button" id="btn-editar-ficha" class="btn btn-danger-outline">Editar Historia</button>' +
-                    '<button type="button" class="btn btn-ghost" data-cerrar-modal>Cerrar</button>' +
-                '</div>' +
+            '<div class="modal-header">' +
+            '<h2 id="titulo-ficha">Ficha de Refracción</h2>' +
+            '<button type="button" class="modal-close" data-cerrar-modal aria-label="Cerrar">&times;</button>' +
+            '</div>' +
+            '<div class="modal-body" id="ficha-contenido"></div>' +
+            '<div class="modal-actions">' +
+            '<button type="button" id="btn-editar-ficha" class="btn btn-danger-outline">Editar Historia</button>' +
+            '<button type="button" class="btn btn-ghost" data-cerrar-modal>Cerrar</button>' +
+            '</div>' +
             '</div>';
         document.body.appendChild(overlay);
     }
@@ -519,15 +519,15 @@ Modulos.historias = (function () {
 
         let html =
             '<table class="tabla tabla-ficha-datos"><tbody>' +
-                '<tr><th>Fecha de consulta</th><td>' + valorMedida(historia.fecha_consulta) + '</td></tr>' +
+            '<tr><th>Fecha de consulta</th><td>' + valorMedida(historia.fecha_consulta) + '</td></tr>' +
             '</tbody></table>' +
 
             '<h4 class="ficha-titulo">V.L. - Visión Lejos</h4>' +
             tablaMedidas('vl', historia) +
 
             '<div class="ficha-add">' +
-                '<h4 class="ficha-titulo">A.D.D. - Adición</h4>' +
-                '<p class="add-valor">' + valorMedida(historia.add_medicion) + '</p>' +
+            '<h4 class="ficha-titulo">A.D.D. - Adición</h4>' +
+            '<p class="add-valor">' + valorMedida(historia.add_medicion) + '</p>' +
             '</div>' +
 
             '<h4 class="ficha-titulo">V.C. - Visión Cerca</h4>' +
@@ -535,9 +535,9 @@ Modulos.historias = (function () {
 
             '<h4 class="ficha-titulo">Material y Tratamiento</h4>' +
             '<p class="ficha-linea">' +
-                '<b>Material:</b> ' + valorMedida(material) +
-                ' &nbsp;·&nbsp; <b>Tipo de Lente:</b> ' + valorMedida(tipoLente) +
-                ' &nbsp;·&nbsp; <b>Tratamiento:</b> ' + valorMedida(tratamiento) +
+            '<b>Material:</b> ' + valorMedida(material) +
+            ' &nbsp;·&nbsp; <b>Tipo de Lente:</b> ' + valorMedida(tipoLente) +
+            ' &nbsp;·&nbsp; <b>Tratamiento:</b> ' + valorMedida(tratamiento) +
             '</p>';
 
         if (indicaciones) {

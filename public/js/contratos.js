@@ -405,6 +405,9 @@ Modulos.contratos = (function () {
         const limpio = termino.trim();
         const url = 'api/pacientes.php' + (limpio === '' ? '' : '?q=' + encodeURIComponent(limpio));
         const slot = document.getElementById('ctr-picker-lista');
+        if (!slot) {
+            return;
+        }
 
         try {
             const respuesta = await API.get(url);
@@ -429,7 +432,9 @@ Modulos.contratos = (function () {
             html += '</div>';
             slot.innerHTML = html;
         } catch (error) {
-            slot.innerHTML = '<p class="sin-datos">' + escapar(error.message || 'Error al buscar.') + '</p>';
+            if (slot) {
+                slot.innerHTML = '<p class="sin-datos">' + escapar(error.message || 'Error al buscar.') + '</p>';
+            }
         }
     }
 
