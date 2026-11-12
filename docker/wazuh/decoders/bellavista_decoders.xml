@@ -1,0 +1,9 @@
+<!--
+  Decoder propio de Óptica Bellavista.
+  El agente usa log_format json (decoder nativo "json").
+  Este decoder cubre wazuh-logtest y recolección syslog de la misma línea JSON.
+-->
+<decoder name="optica_bellavista">
+  <prematch>{"app":"optica_bellavista"</prematch>
+  <plugin_decoder>JSON_Decoder</plugin_decoder>
+</decoder>

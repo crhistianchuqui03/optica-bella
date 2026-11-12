@@ -26,6 +26,7 @@ final class Logger
             ?? '/var/log/app/security.log';
 
         $registro = [
+            'app'       => 'optica_bellavista',
             'timestamp' => (new DateTimeImmutable('now', self::zonaHoraria()))->format(DateTimeInterface::ATOM),
             'event'     => $evento,
             'user'      => $usuario,

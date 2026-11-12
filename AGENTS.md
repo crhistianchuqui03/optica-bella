@@ -9,6 +9,7 @@
 ```bash
 cp .env.example .env             # completar credenciales reales; .env no se versiona
 docker compose up --build        # app en http://localhost:8081
+docker compose --profile wazuh up -d  # manager + agente (lee /var/log/app/security.log)
 docker compose down              # conserva el volumen de la BD
 docker compose down -v           # reinicia la BD; schema.sql se ejecuta de nuevo en el próximo up
 ```
@@ -40,6 +41,13 @@ curl -b /tmp/bv-cookie http://localhost:8081/api/pacientes.php
 docker compose exec app rm -rf /tmp/optica_bellavista_ratelimit
 ```
 
+- Wazuh (profile `wazuh`): decoder `docker/wazuh/decoders/bellavista_decoders.xml`, reglas `docker/wazuh/rules/bellavista_rules.xml` (IDs 100200-100215), agente con `log_format json` sobre `/var/log/app/security.log`. Cada evento JSON incluye `"app":"optica_bellavista"`. Verificar reglas:
+
+```bash
+docker compose --profile wazuh exec wazuh.manager sh -c 'echo "{\"app\":\"optica_bellavista\",\"timestamp\":\"2026-11-05T16:02:14-05:00\",\"event\":\"login_failed\",\"user\":\"admin\",\"ip\":\"172.20.0.1\",\"status\":\"FAILED\",\"details\":{\"motivo\":\"credenciales_invalidas\"}}" | /var/ossec/bin/wazuh-logtest'
+docker compose --profile wazuh exec wazuh.manager grep optica_bellavista /var/ossec/logs/alerts/alerts.json
+```
+
 ## Estructura
 
 - `public/` es el único DocumentRoot de Apache. `src/` y `config/` están fuera del web root y se montan como solo lectura.
@@ -61,7 +69,7 @@ docker compose exec app rm -rf /tmp/optica_bellavista_ratelimit
 - Secretos: solo en `.env` (ignorado por Git). `.env.example` no contiene claves reales. `.gitignore` excluye `.env`, `/var/log/`, `/tmp/`, `*.log`, `.vscode/` y `.idea/`.
 - Sesión: expira por inactividad a los 30 minutos (`SESSION_IDLE_TIMEOUT=1800`), cookie `HttpOnly` + `SameSite=Strict` y `Secure` cuando hay HTTPS.
 - Rate limiting: 5 fallos por IP+usuario cada 15 minutos, almacenados con `flock` en `/tmp/optica_bellavista_ratelimit`.
-- Logs: una línea JSON por evento en `/var/log/app/security.log` con `timestamp`, `event`, `user`, `ip`, `status`, `details`, listo para Wazuh.
+- Logs: una línea JSON por evento en `/var/log/app/security.log` con `app`, `timestamp`, `event`, `user`, `ip`, `status`, `details`, listo para Wazuh.
 - Cabeceras: `Content-Security-Policy`, `X-Frame-Options: DENY`, `X-Content-Type-Options: nosniff` y `Referrer-Policy: strict-origin-when-cross-origin`.
 
 ## Invariantes de datos

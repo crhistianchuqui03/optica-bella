@@ -28,6 +28,51 @@ services:
     depends_on:
       - db
 
+  wazuh.manager:
+    image: wazuh/wazuh-manager:4.13.0
+    profiles: ["wazuh"]
+    hostname: wazuh.manager
+    container_name: bellavista_wazuh_manager
+    restart: unless-stopped
+    ports:
+      - "1514:1514"
+      - "1515:1515"
+    volumes:
+      - ./docker/wazuh/rules/bellavista_rules.xml:/wazuh-config-mount/etc/rules/bellavista_rules.xml:ro
+      - ./docker/wazuh/decoders/bellavista_decoders.xml:/wazuh-config-mount/etc/decoders/bellavista_decoders.xml:ro
+      - ./docker/wazuh/samples:/opt/bellavista/samples:ro
+      - wazuh_api:/var/ossec/api/configuration
+      - wazuh_etc:/var/ossec/etc
+      - wazuh_logs:/var/ossec/logs
+      - wazuh_queue:/var/ossec/queue
+      - wazuh_var:/var/ossec/var/multigroups
+      - wazuh_wodle:/var/ossec/wodles
+      - wazuh_active:/var/ossec/active-response/bin
+    environment:
+      - INDEXER_URL=https://127.0.0.1:9200
+      - INDEXER_USERNAME=admin
+      - INDEXER_PASSWORD=SecretPassword
+      - FILEBEAT_SSL_VERIFICATION_MODE=none
+
+  wazuh.agent:
+    image: wazuh/wazuh-agent:4.13.0
+    profiles: ["wazuh"]
+    hostname: bellavista-agent
+    container_name: bellavista_wazuh_agent
+    restart: unless-stopped
+    depends_on:
+      - wazuh.manager
+      - app
+    environment:
+      - WAZUH_MANAGER=${WAZUH_MANAGER:-wazuh.manager}
+      - WAZUH_MANAGER_PORT=${WAZUH_MANAGER_PORT:-1514}
+      - WAZUH_REGISTRATION_SERVER=${WAZUH_MANAGER:-wazuh.manager}
+      - WAZUH_REGISTRATION_PORT=${WAZUH_REGISTRATION_PORT:-1515}
+      - WAZUH_AGENT_NAME=${WAZUH_AGENT_NAME:-optica-bellavista}
+    volumes:
+      - app_logs:/var/log/app:ro
+      - ./docker/wazuh/ossec-agent.conf:/wazuh-config-mount/etc/ossec.conf:ro
+
   db:
     image: mysql:8.0
     container_name: bellavista_db
@@ -45,3 +90,10 @@ services:
 volumes:
   db_data:
   app_logs:
+  wazuh_api:
+  wazuh_etc:
+  wazuh_logs:
+  wazuh_queue:
+  wazuh_var:
+  wazuh_wodle:
+  wazuh_active:

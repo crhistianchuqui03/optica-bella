@@ -1,0 +1,13 @@
+{"app":"optica_bellavista","timestamp":"2026-11-05T16:01:44-05:00","event":"login_success","user":"admin","ip":"172.20.0.1","status":"SUCCESS","details":{"rol":"ADMIN"}}
+{"app":"optica_bellavista","timestamp":"2026-11-05T16:02:14-05:00","event":"login_failed","user":"admin","ip":"172.20.0.1","status":"FAILED","details":{"motivo":"credenciales_invalidas"}}
+{"app":"optica_bellavista","timestamp":"2026-11-05T16:03:00-05:00","event":"login_rate_limited","user":"admin","ip":"172.20.0.1","status":"DENIED","details":{"intentos":5,"retry_after":890}}
+{"app":"optica_bellavista","timestamp":"2026-11-05T16:04:00-05:00","event":"session_expired","user":"admin","ip":"172.20.0.1","status":"DENIED","details":{"motivo":"inactividad"}}
+{"app":"optica_bellavista","timestamp":"2026-11-05T16:05:00-05:00","event":"logout","user":"admin","ip":"172.20.0.1","status":"SUCCESS","details":{}}
+{"app":"optica_bellavista","timestamp":"2026-11-05T16:06:00-05:00","event":"contract_created","user":"admin","ip":"172.20.0.1","status":"SUCCESS","details":{"contrato_id":1,"numero_contrato":"0001001"}}
+{"app":"optica_bellavista","timestamp":"2026-11-05T16:07:00-05:00","event":"contract_cancelled","user":"admin","ip":"172.20.0.1","status":"SUCCESS","details":{"contrato_id":1}}
+{"app":"optica_bellavista","timestamp":"2026-11-05T16:08:00-05:00","event":"payment_received","user":"admin","ip":"172.20.0.1","status":"SUCCESS","details":{"monto":150}}
+{"app":"optica_bellavista","timestamp":"2026-11-05T16:09:00-05:00","event":"expense_created","user":"admin","ip":"172.20.0.1","status":"SUCCESS","details":{"monto":40}}
+{"app":"optica_bellavista","timestamp":"2026-11-05T16:10:00-05:00","event":"user_created","user":"admin","ip":"172.20.0.1","status":"SUCCESS","details":{"username":"vendedor1","rol":"VENDEDOR"}}
+{"app":"optica_bellavista","timestamp":"2026-11-05T16:11:00-05:00","event":"user_updated","user":"admin","ip":"172.20.0.1","status":"SUCCESS","details":{"usuario_afectado":2}}
+{"app":"optica_bellavista","timestamp":"2026-11-05T16:12:00-05:00","event":"user_status_changed","user":"admin","ip":"172.20.0.1","status":"SUCCESS","details":{"estado":0}}
+{"app":"optica_bellavista","timestamp":"2026-11-05T16:13:00-05:00","event":"password_reset","user":"admin","ip":"172.20.0.1","status":"SUCCESS","details":{"usuario_afectado":2}}
